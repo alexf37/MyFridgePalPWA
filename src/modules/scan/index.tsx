@@ -11,7 +11,7 @@ const Scan = () => {
   useEffect(() => {
     if (typeof window !== undefined)
       void navigator.mediaDevices.enumerateDevices();
-  }, [window]);
+  }, []);
 
   if (showScanner) {
     return (
