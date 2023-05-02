@@ -3,6 +3,7 @@ import { Camera, type CameraType } from "react-camera-pro";
 import React, {
   useState,
   useRef,
+  useEffect,
   type Dispatch,
   type SetStateAction,
 } from "react";
@@ -25,16 +26,22 @@ const Scanner = ({
 }) => {
   const [showImage, setShowImage] = useState<boolean>(false);
   const camera = useRef<CameraType>(null);
+  useEffect(() => {
+    void navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false,
+    });
+  }, []);
   return (
-    <div className="absolute h-full w-full">
+    <div className="fixed inset-0 z-50 h-full w-full">
       {showImage && (
         <img
-          className="z-100"
+          className="z-50"
           src={image?.toString() ?? ""}
           alt="scanned image"
         />
       )}
-      <div className="absolute z-0 h-screen w-screen">
+      <div className="fixed inset-0 z-50 h-screen w-screen">
         <Camera
           aspectRatio="cover"
           facingMode="environment"
@@ -52,7 +59,7 @@ const Scanner = ({
       </div>
 
       <button
-        className="z-100 absolute bottom-14 left-1/4 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-white p-2 text-slate-700 shadow-lg"
+        className="absolute bottom-14 left-1/4 z-50 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-white p-2 text-slate-700 shadow-lg"
         onClick={() => {
           if (!showImage) {
             setShowScanner(false);
@@ -68,7 +75,7 @@ const Scanner = ({
         )}
       </button>
       <button
-        className="z-100 absolute bottom-8 left-1/2 flex h-24 w-24 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-white p-2 text-slate-700 shadow-lg"
+        className="absolute bottom-8 left-1/2 z-50 flex h-24 w-24 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-white p-2 text-slate-700 shadow-lg"
         onClick={() => {
           if (camera.current) {
             const photo = camera.current.takePhoto();
