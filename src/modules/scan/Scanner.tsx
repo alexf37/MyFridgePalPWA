@@ -3,10 +3,10 @@ import { Camera, type CameraType } from "react-camera-pro";
 import React, {
   useState,
   useRef,
-  useEffect,
   type Dispatch,
   type SetStateAction,
 } from "react";
+import { QrReader } from "react-qr-reader";
 
 import {
   ScanLineIcon,
@@ -26,14 +26,8 @@ const Scanner = ({
 }) => {
   const [showImage, setShowImage] = useState<boolean>(false);
   const camera = useRef<CameraType>(null);
-  useEffect(() => {
-    void navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: false,
-    });
-  }, []);
   return (
-    <div className="fixed inset-0 z-50 h-full w-full">
+    <div className="absolute z-50 h-full w-full">
       {showImage && (
         <img
           className="z-50"
@@ -41,22 +35,45 @@ const Scanner = ({
           alt="scanned image"
         />
       )}
-      <div className="fixed inset-0 z-50 h-screen w-screen">
-        <Camera
-          aspectRatio="cover"
-          facingMode="environment"
-          ref={camera}
-          errorMessages={{
-            noCameraAccessible:
-              "No camera device accessible. Please connect your camera or try a different browser.",
-            permissionDenied:
-              "Permission denied. Please refresh and give camera permission.",
-            switchCamera:
-              "It is not possible to switch camera to different one because there is only one video device accessible.",
-            canvas: "Canvas is not supported.",
-          }}
-        />
-      </div>
+      {/* <QrReader
+        constraints={{ facingMode: "environment", width: 500, height: 500 }}
+        className="fixed inset-0 z-20 aspect-[9_/_16] h-full scale-[calc(16_/_9)] transform"
+        videoContainerStyle={{
+          padding: 0,
+          minWidth: "100vw",
+          width: "auto",
+          height: "100vh",
+          position: "fixed",
+          inset: 0,
+        }}
+        videoStyle={{
+          padding: 0,
+          minWidth: "100vw",
+          width: "auto",
+          height: "100vh",
+          position: "fixed",
+          inset: 0,
+        }}
+        onResult={(result, error) => {
+          if (!!error) {
+            console.info(error);
+          }
+        }}
+      /> */}
+      <Camera
+        aspectRatio="cover"
+        facingMode="environment"
+        ref={camera}
+        errorMessages={{
+          noCameraAccessible:
+            "No camera device accessible. Please connect your camera or try a different browser.",
+          permissionDenied:
+            "Permission denied. Please refresh and give camera permission.",
+          switchCamera:
+            "It is not possible to switch camera to different one because there is only one video device accessible.",
+          canvas: "Canvas is not supported.",
+        }}
+      />
 
       <button
         className="absolute bottom-14 left-1/4 z-50 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-white p-2 text-slate-700 shadow-lg"

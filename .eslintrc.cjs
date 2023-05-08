@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 
+/* eslint-disable react/no-unescaped-entities */
+
 /** @type {import("eslint").Linter.Config} */
 const config = {
   overrides: [

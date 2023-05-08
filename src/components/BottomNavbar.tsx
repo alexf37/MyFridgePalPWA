@@ -21,7 +21,7 @@ const NavItem = ({
 export default function BottomNavbar() {
   return (
     <>
-      <nav className="z-100 pb-safe mt-auto shrink-0 rounded-t-3xl bg-white shadow-2xl">
+      <nav className="pb-safe z-10 mt-auto shrink-0 rounded-t-3xl bg-white shadow-2xl drop-shadow-2xl">
         <div className="flex justify-around px-4 pb-2 pt-4">
           <NavItem label="Home" href="/">
             <HomeIcon />

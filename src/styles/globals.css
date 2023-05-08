@@ -5,8 +5,8 @@
 html,
 body {
   overscroll-behavior: none;
-  height: 100vh;
-  width: 100vw;
+  height: 100vh !important;
+  width: 100vw !important;
 }
 
 body {
@@ -20,6 +20,32 @@ body {
 }
 
 @layer utilities {
+  .gradient-eco {
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, #10b981, #22c55e, #84cc16);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+  .gradient-text {
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, #3b82f6, #22d3ee, #10b981);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+  .gradient-circle {
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, #3b82f6, #22d3ee, #10b981);
+    background-size: 100%;
+    color: white !important;
+    clip-path: circle(24px at center);
+    -webkit-clip-path: circle(24px at center);
+  }
   /*
     adds padding to account for potential notch and home indicator when running as a PWA
     note: if you're messing with things and think you need to add !important, 
